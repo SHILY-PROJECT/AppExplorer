@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Explorer";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/sidebars.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/list-groups.css" />
+<script src="~/lib/bootstrap/dist/js/sidebars.js" defer></script>
+
+<div class="tree-view-directories">
+
+    <select class="form-select" aria-label="Default select example">
+        <option value="app">Application directories</option>
+        <option value="all">Computer directories</option>
+    </select>
+
+    <nav class="flex-shrink-0 p-3 bg-white" style="min-width: 280px; float: left; height: 100%">
+        <component>
+            @(await Html.RenderComponentAsync<ExplorerApp.Views.Components.TreeDirectoriesView>(RenderMode.Server))
+        </component>      
+    </nav>
+
+</div>
+
+<div class="list-group list-group-item overflow-auto list-explorer-obj">
+    <component>
+        @(await Html.RenderComponentAsync<ExplorerApp.Views.Components.ListExplorerObjectsView>(RenderMode.Server))
+    </component>
+</div>

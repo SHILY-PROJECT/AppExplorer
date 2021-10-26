@@ -1,0 +1,13 @@
+﻿@inherits ListExplorerObjectsViewBase
+
+@if (ListExplorerObjects != null)
+{
+    @foreach (var obj in ListExplorerObjects)
+    {
+        <DisplayExplorerObject ExplorerObject="obj"/>
+    } 
+}
+else
+{
+    <div class="spinner"></div>
+}

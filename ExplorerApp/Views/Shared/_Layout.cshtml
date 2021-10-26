@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ExplorerApp</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <header style="margin-bottom: 80px;">
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 my-nav-bar">           
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Explorer"> 
+                    <table>
+                        <tr>
+                            <td><img class="img-logo" src="~/images/explorer-label.svg" alt="twbs" width="38" height="38"></td>
+                            <td>ExplorerApp</td>
+                        </tr>
+                    </table>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>           
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <nav class="navbar fixed-bottom navbar-light bg-white shadow-lg p-3 rounded navbar-custom">           
+        <div class="container justify-content-center" style="vertical-align: central;">
+            <p style="margin: 0px;">
+                <a href="https://github.com/SHILY-PROJECT">SHILY PROJECT</a>
+                &copy; 2021 - 
+                <a href="https://github.com/SHILY-PROJECT/ExplorerApp">ExplorerApp</a>
+            </p>
+        </div>          
+    </nav>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>  
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="_framework/blazor.server.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
