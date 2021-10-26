@@ -20,8 +20,6 @@ namespace ExplorerApp
 
         private List<ExplorerObjectViewModel> CurrentExplorerObjects { get; set; }
 
-        //private List<IndexedObjectViewModel> IndexedRoutes { get; set; }
-
         private DataStore()
         {
             AppDirectories = new();
@@ -50,7 +48,7 @@ namespace ExplorerApp
 
         private void CreateTreeView(string path)
         {
-            foreach (var folder in Directory.EnumerateDirectories(path))
+            foreach (var folder in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
                 AppDirectories.Add(new FolderObjectViewModel(new DirectoryInfo(folder)));          
         }
 

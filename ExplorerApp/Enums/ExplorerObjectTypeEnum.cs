@@ -1,6 +1,6 @@
 ﻿namespace ExplorerApp.Enums
 {
-    public enum ObjectTypeEnum
+    public enum ExplorerObjectTypeEnum
     {
         Disc = 0,
         Folder = 1,

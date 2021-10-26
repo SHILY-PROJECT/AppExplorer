@@ -1,6 +1,7 @@
 ﻿@inherits DisplayExplorerObjectBase
 
-<a class="list-group-item list-group-checkable list-group-item-action d-flex gap-3 py-3 cursor-def container-fluid" href="#" aria-current="true">
+<a class="list-group-item list-group-checkable list-group-item-action d-flex gap-3 py-3 cursor-def container-fluid" href="#" aria-current="true"
+    @ondblclick="OpenDirectory">
     <table width="100%">
         <tr>
             <td width="45"><img src="@ExplorerObject.Icon" width="35" height="35" alt="twbs" style="margin-right: 10px;"></td>

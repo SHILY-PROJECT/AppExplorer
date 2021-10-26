@@ -14,7 +14,7 @@ namespace ExplorerApp.Models
 
         public Uri ObjectFullName { get; set; }
 
-        public ObjectTypeEnum TypeObject { get; set; }
+        public ExplorerObjectTypeEnum TypeObject { get; set; }
 
         public string Icon { get; set; }
 

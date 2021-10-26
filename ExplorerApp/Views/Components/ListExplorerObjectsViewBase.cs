@@ -18,5 +18,11 @@ namespace ExplorerApp.Views.Components
 
         private void LoadParentRoute()
             => ListExplorerObjects = new(DataStore.Instance.GetRouteObjects(DataStore.Instance.ParentRoute));
+
+        protected void RefreshDisplayExplorer(string route)
+        {
+            ListExplorerObjects = null;
+            ListExplorerObjects = new(DataStore.Instance.GetRouteObjects(route));
+        }
     }
 }

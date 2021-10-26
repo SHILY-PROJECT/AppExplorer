@@ -21,12 +21,12 @@ namespace ExplorerApp.Models
             if (Route.Contains(":"))
             {
                 Route = Route.Replace(":", "");
-                TypeObject = ObjectTypeEnum.Disc;
+                TypeObject = ExplorerObjectTypeEnum.Disc;
                 Icon = "";
             }
             else
             {
-                TypeObject = ObjectTypeEnum.Folder;
+                TypeObject = ExplorerObjectTypeEnum.Folder;
                 Icon = "/images/extensions/folder.svg";
             }
 

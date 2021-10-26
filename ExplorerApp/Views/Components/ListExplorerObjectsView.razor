@@ -4,8 +4,8 @@
 {
     @foreach (var obj in ListExplorerObjects)
     {
-        <DisplayExplorerObject ExplorerObject="obj"/>
-    } 
+        <DisplayExplorerObject ExplorerObject="obj" OnRoute="RefreshDisplayExplorer"/>
+    }
 }
 else
 {

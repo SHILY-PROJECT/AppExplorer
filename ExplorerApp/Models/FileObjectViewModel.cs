@@ -12,7 +12,7 @@ namespace ExplorerApp.Models
             Route = new Uri(file.FullName).AbsolutePath.Replace(DataStore.Instance.ParentDirectoryFullName.AbsolutePath, "");
             ObjectFullName = new Uri(file.FullName);
             ObjectName = file.Name;
-            TypeObject = ObjectTypeEnum.File;
+            TypeObject = ExplorerObjectTypeEnum.File;
 
             // костыльный вариант, пока что, не знаю как иначе
             var path = Path.Combine(Environment.CurrentDirectory, @"wwwroot\images\extensions");
