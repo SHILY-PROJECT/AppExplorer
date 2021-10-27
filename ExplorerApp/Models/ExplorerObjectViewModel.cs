@@ -29,7 +29,7 @@ namespace ExplorerApp.Models
 
         protected internal void DetermineSizeObject(DirectoryInfo directory)
         {
-            SizeInBytes = Directory.EnumerateFiles(directory.FullName, "*", SearchOption.AllDirectories).Sum(x => (long)x.Length);
+            SizeInBytes = Directory.EnumerateFiles(directory.FullName, "*", SearchOption.AllDirectories).Sum(x => new FileInfo(x).Length);
             SizeForView = FormatSize(SizeInBytes);
         }
 
