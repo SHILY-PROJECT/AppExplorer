@@ -25,7 +25,7 @@ a {
 }
 
 /* Sticky footer styles
--------------------------------------------------- */
+--------------------------------------------------*/
 html {
   font-size: 14px;
 }
@@ -96,6 +96,8 @@ a.navbar-brand {
   margin-left: 10px;
 }
 
+/* Логотип ExplorerApp
+--------------------------------------------------*/
 img.img-logo {
   margin-right: 5px;
   float: left;
@@ -103,10 +105,11 @@ img.img-logo {
   filter: drop-shadow(1px 1px 1px #888);
 }
 
+/* Курсоры
+--------------------------------------------------*/
 .cursor-def{
   cursor: default;
 }
-
 .cursor-ptr{
   cursor: pointer;
 }
@@ -124,7 +127,6 @@ img.img-logo {
   left: 55%;
   position: fixed;
 }
-
 @keyframes spin {
   0% {
       transform: rotate(0deg)
@@ -208,7 +210,6 @@ img.img-logo {
   margin: 10px;
   display: inline-block;
 }
-
 .arrow:before {
   content: " ";
   width: 10px;
@@ -229,54 +230,21 @@ img.img-logo {
   transform: rotate(-50deg);
   right: -10px;
 }
-
 .left {
   transform: rotate(-90deg);
 }
-
 .right {
   transform: rotate(90deg);
 }
-
 .half-left {
   transform: rotate(-45deg);
 }
-
 .half-right {
   transform: rotate(45deg);
 }
 
-/*
-*/
-.rcorners3 {
-  border-radius: 15px 50px;
-  background: #219dad;
-  padding: 20px;
-  width: 80px;
-  height: 20px;
-}
-
-.btn-nav-st {
-  width: 50px;
-  height: 25px;
-  border: 1px;
-  border-color: rgba(0, 0, 0, .15);
-  border-radius: 100px;
-  outline: none;
-  background: #ffffff;
-  opacity: 0.8;
-  color: white; 
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-}
-.btn-nav-st:hover {
-  background: #2a56d1;
-  opacity: 0.8;
-  outline: .5px solid rgba(0, 0, 0, 0.15);
-}
-
-
-
+/* Кнопки навигации
+--------------------------------------------------*/
 .btn-dark,
 input[type="submit"]{
     border:solid 0.5px rgba(0, 0, 0, .15);
@@ -290,7 +258,6 @@ input[type="submit"]:hover,
     background: #1f1f1f;
     color: #fff;
 }
-
 .btn:hover,
 input[type="submit"]:hover{
     -webkit-transition: all .4s ease-in-out;
@@ -298,8 +265,4 @@ input[type="submit"]:hover{
         -ms-transition: all .4s ease-in-out;
          -o-transition: all .4s ease-in-out;
             transition: all .4s ease-in-out;
-}
-
-.btn:focus {
-  outline: none;
 }
