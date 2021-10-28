@@ -5,11 +5,11 @@ using ExplorerApp.Models;
 
 namespace ExplorerApp.Controllers
 {
-    public class HomeController : Controller
+    public class ExplorerController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ExplorerController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ExplorerController(ILogger<ExplorerController> logger)
         {
             _logger = logger;
         }
@@ -19,7 +19,7 @@ namespace ExplorerApp.Controllers
             return View();
         }
 
-        public IActionResult Explorer()
+        public IActionResult Index()
         {
             return View();
         }

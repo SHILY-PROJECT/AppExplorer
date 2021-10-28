@@ -16,11 +16,13 @@ namespace ExplorerApp.Models
 
         public ExplorerObjectTypeEnum TypeObject { get; set; }
 
+        public string Extension { get; set; }
+
         public string Icon { get; set; }
 
         public long SizeInBytes { get; private set; }
 
-        public string SizeForView { get; private set; }       
+        public string SizeForView { get; private set; }
 
         public ExplorerObjectViewModel()
         {
@@ -31,12 +33,14 @@ namespace ExplorerApp.Models
         {
             SizeInBytes = Directory.EnumerateFiles(directory.FullName, "*", SearchOption.AllDirectories).Sum(x => new FileInfo(x).Length);
             SizeForView = FormatSize(SizeInBytes);
+            Extension = "folder";
         }
 
         protected internal void DetermineSizeObject(FileInfo file)
         {
             SizeInBytes = file.Length;
             SizeForView = FormatSize(SizeInBytes);
+            Extension = file.Extension.Trim('.');
         }
 
         protected internal string FormatSize(long length)

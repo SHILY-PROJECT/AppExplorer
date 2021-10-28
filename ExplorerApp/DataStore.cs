@@ -8,7 +8,20 @@ namespace ExplorerApp
 {
     internal class DataStore
     {
-        internal static DataStore Instance;
+        private static DataStore _instance;
+
+        internal static DataStore Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new DataStore();
+                    ConfigureData();
+                }
+                return _instance;
+            }
+        }
 
         internal Uri ParentDirectoryFullName { get; private set; }
 
@@ -28,15 +41,6 @@ namespace ExplorerApp
             ParentRoute = new Uri(Environment.CurrentDirectory).AbsolutePath.Replace(ParentDirectoryFullName.AbsolutePath, "");
         }
 
-        internal static void ConfigureData()
-        {
-            DataStore.Instance = new DataStore();
-            var parent = new FolderObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
-            DataStore.Instance.AppDirectories.Add(parent);
-            DataStore.Instance.NavigationQueue.Add(parent);
-            DataStore.Instance.CreateTreeView(Environment.CurrentDirectory); 
-        }
-
         internal List<ExplorerObjectViewModel> GetRouteObjects(string route)
         {
             CurrentExplorerObjects = new();
@@ -44,6 +48,14 @@ namespace ExplorerApp
             CurrentExplorerObjects.AddRange(routeObjects.Folders);
             CurrentExplorerObjects.AddRange(routeObjects.Files);
             return CurrentExplorerObjects;
+        }
+
+        private static void ConfigureData()
+        {
+            var parent = new FolderObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
+            Instance.AppDirectories.Add(parent);
+            Instance.NavigationQueue.Add(parent);
+            Instance.CreateTreeView(Environment.CurrentDirectory);
         }
 
         private void CreateTreeView(string path)

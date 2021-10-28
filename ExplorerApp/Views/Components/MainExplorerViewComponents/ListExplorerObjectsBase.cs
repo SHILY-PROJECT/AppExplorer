@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ExplorerApp.Views.Components
+namespace ExplorerApp.Views.Components.MainExplorerViewComponents
 {
-    public class ListExplorerObjectsViewBase : ComponentBase
+    public class ListExplorerObjectsBase : ComponentBase
     {
         public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
 

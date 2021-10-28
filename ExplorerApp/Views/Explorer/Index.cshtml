@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Explorer";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/sidebars.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/list-groups.css" />
+<script src="~/lib/bootstrap/dist/js/sidebars.js" defer></script>
+
+<div class="container-fluid">
+    <component>
+        @(await Html.RenderComponentAsync<ExplorerApp.Views.Components.MainExplorerView>(RenderMode.Server))
+    </component>
+</div>

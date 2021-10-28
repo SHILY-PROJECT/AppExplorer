@@ -26,7 +26,6 @@ namespace ExplorerApp
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
             services.AddControllersWithViews();
         }
 
@@ -44,8 +43,6 @@ namespace ExplorerApp
                 app.UseHsts();
             }
 
-            DataStore.ConfigureData();
-
             app.UseHttpsRedirection();
 
             app.UseStaticFiles();
@@ -56,10 +53,8 @@ namespace ExplorerApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Explorer}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Explorer}/{action=Index}/{id?}");
                 endpoints.MapBlazorHub();
-                //endpoints.MapRazorPages();
-                //endpoints.MapFallbackToPage("/_Host");
             });
         }
     }
