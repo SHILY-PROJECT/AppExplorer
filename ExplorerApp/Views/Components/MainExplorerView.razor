@@ -1,36 +1,38 @@
 ﻿@inherits MainExplorerViewBase
 
-<div class="container-fluid">
-    @* Панель навигации
+<div class="d-flex" style="display: inline-block; float: left; width: 100%">
+
+    @* Дерево директорий
     ---------------------------------------------------------------------*@
-    <div class="navigation-ex-bar">
-        <component>
-            <ExplorerApp.Views.Components.MainExplorerViewComponents.NavigateExplorerBar />
-        </component>
+    <div class="tree-dir">
+        <select class="form-select" aria-label="Default select example">
+            <option value="app">Application directories</option>
+            <option value="all">Computer directories</option>
+        </select>
+        <nav class="flex-shrink-0 p-3 bg-white">
+            <component>
+                <ExplorerApp.Views.Components.MainExplorerViewComponents.TreeDirectories />
+            </component>      
+        </nav>
     </div>
 
-    <div class="container-fluid full-ex-contains">
-        @* Дерево директории
+    <div class="nav-and-content-exp-view">
+
+        @* Панель навигации
         ---------------------------------------------------------------------*@
-        <div class="tree-dir">
-            <select class="form-select" aria-label="Default select example">
-                <option value="app">Application directories</option>
-                <option value="all">Computer directories</option>
-            </select>
-            <nav class="flex-shrink-0 p-3 bg-white">
-                <component>
-                    <ExplorerApp.Views.Components.MainExplorerViewComponents.TreeDirectories />
-                </component>      
-            </nav>
-        </div>
-        @* Представление объектов папки
-        ---------------------------------------------------------------------*@
-        <div class="list-group list-group-item overflow-auto list-explorer-obj">
-            <component>
-               <ExplorerApp.Views.Components.MainExplorerViewComponents.ListExplorerObjects />
+        <div class="nav-ex-bar">
+            <component >
+                <ExplorerApp.Views.Components.MainExplorerViewComponents.NavigateBar OnNavChangeRouteBackOrNext="SwitchRouteDirection"/>
             </component>
         </div>
-
+        
+        @* Представление объектов папки
+        ---------------------------------------------------------------------*@
+        <div class="list-group w-100 overflow-auto list-exp-obj" style="margin-left: 0px; margin-right: 0px; max-width: inherit">
+            <component >
+                <ExplorerApp.Views.Components.MainExplorerViewComponents.ListExplorerObjects/>
+            </component>
+        </div>
     </div>
 </div>
 

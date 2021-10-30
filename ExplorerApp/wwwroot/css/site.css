@@ -137,11 +137,29 @@ img.img-logo {
   }
 }
 
-/* Бар навигации
+/* Дерево
 --------------------------------------------------*/
-.navigation-ex-bar{
-  max-height: 60px;
+.tree-dir{
+  margin: 0px;
+  min-width: 320px;
+  margin-right: 10px;
+  padding: 10px;
 
+  max-height: 84vh;
+  min-height: 84vh;
+
+  border-radius: .3rem;
+  border: solid rgba(0, 0, 0, .15);
+  border-width: 1px 1px 1px 1px;
+}
+
+/* Бар навигации и представление элементов папки
+--------------------------------------------------*/
+.nav-and-content-exp-view{
+  width: 100%;
+}
+.nav-ex-bar{
+  max-height: 60px;
   margin: 0px;
   margin-top: 0px;
   margin-bottom: 10px;
@@ -151,39 +169,14 @@ img.img-logo {
   border: solid rgba(0, 0, 0, .15);
   border-width: 1px 1px 1px 1px;
 }
-
-/* Дерево и представление элементов папки
---------------------------------------------------*/
-.full-ex-contains{
-  display: inline-flex;
-
-  max-height: 77vh;
-  min-height: 77vh;
-
-  margin-top: 0px;
-  padding: 0px;
-}
-.tree-dir{
-  float: left;
-
-  margin: 0px;
-  min-width: 320px;
-  margin-right: 10px;
-  padding: 10px;
-
-  max-height: inherit;
-  min-height: inherit;
+.list-exp-obj {
+  max-height: 76.5vh;
+  min-height: 20vh;
+  height: 100%;
 
   border-radius: .3rem;
   border: solid rgba(0, 0, 0, .15);
   border-width: 1px 1px 1px 1px;
-}
-.list-explorer-obj {
-  float: left;
-
-  padding: 5px;
-  max-height: inherit;
-  min-height: inherit;
 }
 
 /* Кнопки панели навигации

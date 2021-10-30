@@ -50,6 +50,14 @@ namespace ExplorerApp
             return CurrentExplorerObjects;
         }
 
+        internal List<ExplorerObjectViewModel> SwitchRouteDirection(bool routeDirection)
+        {
+
+
+
+            return new List<ExplorerObjectViewModel>();
+        }
+
         private static void ConfigureData()
         {
             var parent = new FolderObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
