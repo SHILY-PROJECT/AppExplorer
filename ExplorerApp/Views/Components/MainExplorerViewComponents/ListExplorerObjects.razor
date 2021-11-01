@@ -4,7 +4,7 @@
 {
     @foreach (var obj in ListExplorerObjects)
     {
-        <DisplayExplorerObject ExplorerObject="obj" OnGoToRoute="GoToRoute"/>
+        <DisplayExplorerObject ExplorerObject="obj" @ref="ChildDisplayExplorerObject" OnGoToRoute="GoToRoute"/>
     }
 }
 else

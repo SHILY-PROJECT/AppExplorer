@@ -12,7 +12,10 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         [Parameter]
         public EventCallback<bool> OnChangeRouteBackOrNext { get; set; }
 
+        [Parameter]
         public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
+
+        protected internal DisplayExplorerObject ChildDisplayExplorerObject { get; set; }
 
         protected override Task OnInitializedAsync()
         {

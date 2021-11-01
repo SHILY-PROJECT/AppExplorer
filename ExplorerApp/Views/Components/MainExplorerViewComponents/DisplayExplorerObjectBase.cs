@@ -16,6 +16,11 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         [Parameter]
         public EventCallback<string> OnGoToRoute { get; set; }
 
+        public async Task OnGoToRouteM()
+        {
+            await OnGoToRoute.InvokeAsync(ExplorerObject.Route);
+        }
+
         protected async Task OpenDirectory() => await (ExplorerObject.TypeObject switch
         {
             ExplorerObjectTypeEnum.Disc or ExplorerObjectTypeEnum.Folder => OnGoToRoute.InvokeAsync(ExplorerObject.Route),

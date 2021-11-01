@@ -11,7 +11,7 @@
         </select>
         <nav class="flex-shrink-0 p-3 bg-white">
             <component>
-                <ExplorerApp.Views.Components.MainExplorerViewComponents.TreeDirectories />
+                <TreeDirectories @ref="Descendants.TreeDirectories"/>
             </component>      
         </nav>
     </div>
@@ -22,7 +22,7 @@
         ---------------------------------------------------------------------*@
         <div class="nav-ex-bar">
             <component >
-                <ExplorerApp.Views.Components.MainExplorerViewComponents.NavigateBar OnNavChangeRouteBackOrNext="SwitchRouteDirection"/>
+                <NavigateBar @ref="Descendants.NavigateBar" OnNavChangeRouteBackOrNext="SwitchRouteDirection"/>
             </component>
         </div>
         
@@ -30,7 +30,7 @@
         ---------------------------------------------------------------------*@
         <div class="list-group w-100 overflow-auto list-exp-obj" style="margin-left: 0px; margin-right: 0px; max-width: inherit; padding: 5px">
             <component >
-                <ExplorerApp.Views.Components.MainExplorerViewComponents.ListExplorerObjects/>
+                <ListExplorerObjects @ref="Descendants.ListExplorerObjects"/>
             </component>
         </div>
 
