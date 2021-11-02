@@ -9,8 +9,8 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
 {
     public class ListExplorerObjectsBase : ComponentBase
     {
-        [Parameter]
-        public EventCallback<bool> OnChangeRouteBackOrNext { get; set; }
+        //[Parameter]
+        //public EventCallback<bool> OnChangeRouteBackOrNext { get; set; }
 
         [Parameter]
         public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
@@ -23,19 +23,22 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
             return base.OnInitializedAsync();
         }
 
-        private void LoadParentRoute()
-            => ListExplorerObjects = new(DataStore.Instance.GetRouteObjects(DataStore.Instance.ParentRoute));
+        public void SetNewListExplorerObjects(List<ExplorerObjectViewModel> listExplorerObjects)
+            => ListExplorerObjects = listExplorerObjects;      
 
-        protected void GoToRouteDirectionBackOrNext(bool routeDirection)
-        {
-            //ListExplorerObjects = null;
-            ListExplorerObjects = new(DataStore.Instance.SwitchRouteDirection(routeDirection));
-        }
+        private void LoadParentRoute()
+            => ListExplorerObjects = DataStore.Instance.GetRouteObjects(DataStore.Instance.BaseRoute);
 
         protected void GoToRoute(string route)
         {
             ListExplorerObjects = null;
-            ListExplorerObjects = new(DataStore.Instance.GetRouteObjects(route));
+            ListExplorerObjects = DataStore.Instance.GetRouteObjects(route);
         }
+
+        //protected void DisplayExplorerObjects(List<ExplorerObjectViewModel> explorerObjects)
+        //{
+        //    ListExplorerObjects = null;
+        //    ListExplorerObjects = explorerObjects;
+        //}
     }
 }

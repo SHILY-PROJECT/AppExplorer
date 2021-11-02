@@ -4,17 +4,21 @@ namespace ExplorerApp.Models
 {
     public class DescendantsMainExplorerView
     {
-        public NavigateBar NavigateBar { get; set; }
-        public TreeDirectories TreeDirectories { get; set; }
-        public ListExplorerObjects ListExplorerObjects { get; set; }
-        public DisplayExplorerObject DisplayExplorerObject
+        public NavigateBar NavigateBarView { get; set; }
+
+        public TreeDirectories TreeDirectoriesView { get; set; }
+
+        public ListExplorerObjects ListExplorerObjectsView { get; set; }
+
+        public DisplayExplorerObject DisplayExplorerObjectView
         {
             get
             {
-                if (DisplayExplorerObject == null) DisplayExplorerObject = ListExplorerObjects.ChildDisplayExplorerObject;
-                return DisplayExplorerObject;
+                if (DisplayExplorerObjectView == null)
+                    DisplayExplorerObjectView = ListExplorerObjectsView.ChildDisplayExplorerObject;
+                return DisplayExplorerObjectView;
             }
-            set => DisplayExplorerObject = value;
+            set => DisplayExplorerObjectView = value;
         }
     }
 }

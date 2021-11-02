@@ -9,7 +9,7 @@ namespace ExplorerApp.Models
     {
         public FileObjectViewModel(FileInfo file)
         {
-            Route = new Uri(file.FullName).AbsolutePath.Replace(DataStore.Instance.ParentDirectoryFullName.AbsolutePath, "");
+            Route = new Uri(file.FullName).AbsolutePath.Replace(DataStore.Instance.BaseDirectoryFullName.AbsolutePath, "");
             ObjectFullName = new Uri(file.FullName);
             ObjectName = file.Name;
             TypeObject = ExplorerObjectTypeEnum.File;

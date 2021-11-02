@@ -14,7 +14,7 @@ namespace ExplorerApp.Models
 
         public FolderObjectViewModel(DirectoryInfo directory)
         {
-            Route = new Uri(directory.FullName).AbsolutePath.Replace(DataStore.Instance.ParentDirectoryFullName.AbsolutePath, "");
+            Route = new Uri(directory.FullName).AbsolutePath.Replace(DataStore.Instance.BaseDirectoryFullName.AbsolutePath, "");
             ObjectFullName = new Uri(directory.FullName);
             ObjectName = directory.Name;
 

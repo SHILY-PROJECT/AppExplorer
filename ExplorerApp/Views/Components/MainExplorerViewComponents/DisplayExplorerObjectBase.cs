@@ -5,6 +5,7 @@ using System.IO;
 using System.Diagnostics;
 using ExplorerApp.Models;
 using ExplorerApp.Enums;
+using System.Collections.Generic;
 
 namespace ExplorerApp.Views.Components.MainExplorerViewComponents
 {
@@ -16,12 +17,15 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         [Parameter]
         public EventCallback<string> OnGoToRoute { get; set; }
 
-        public async Task OnGoToRouteM()
+        [Parameter]
+        public EventCallback<List<ExplorerObjectViewModel>> OnGoToRouteBackOrNext { get; set; }
+
+        public void OpenExplorerObject(string route)
         {
-            await OnGoToRoute.InvokeAsync(ExplorerObject.Route);
+            OnGoToRoute.InvokeAsync(route);          
         }
 
-        protected async Task OpenDirectory() => await (ExplorerObject.TypeObject switch
+        protected async Task OpenExplorerObject() => await (ExplorerObject.TypeObject switch
         {
             ExplorerObjectTypeEnum.Disc or ExplorerObjectTypeEnum.Folder => OnGoToRoute.InvokeAsync(ExplorerObject.Route),
             ExplorerObjectTypeEnum.File => ProcessingFile(ExplorerObject.ObjectFullName.LocalPath),
