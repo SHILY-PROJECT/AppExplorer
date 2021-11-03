@@ -9,6 +9,7 @@ namespace ExplorerApp
     internal class DataStore
     {
         private static DataStore _instance;
+        private int _currentPositionInHistory;
 
         internal static DataStore Instance
         {
@@ -35,11 +36,9 @@ namespace ExplorerApp
         private List<ExplorerObjectViewModel> CurrentExplorerObjects { get; set; }
 
 
-        private int _currentPositionInHistory = 0;
-
-
         private DataStore()
         {
+            _currentPositionInHistory = 0;
             BaseDirectoryFullName = new Uri(Path.GetDirectoryName(Environment.CurrentDirectory));
             BaseRoute = new Uri(Environment.CurrentDirectory).AbsolutePath.Replace(BaseDirectoryFullName.AbsolutePath, "");
         }
@@ -51,26 +50,9 @@ namespace ExplorerApp
             return CurrentExplorerObjects = AppDirectories.GetExplorerObjectsByRoute(route);
         }
 
-        //internal bool GetRouteFromHistory(bool routeDirection, out List<ExplorerObjectViewModel> explorerObjects)
-        //{
-        //    explorerObjects = null;
-
-        //    var countRouteQueue = NavigationHistoryRoutesQueue.Count - 1;
-
-        //    if ((routeDirection && _currentPositionInHistory >= countRouteQueue) ||
-        //        (!routeDirection && countRouteQueue <= 1)) return false;
-
-        //    if (routeDirection) _currentPositionInHistory++;
-        //    else _currentPositionInHistory--;
-
-        //    explorerObjects = AppDirectories.GetExplorerObjectsByRoute(NavigationHistoryRoutesQueue[_currentPositionInHistory]);
-
-        //    return explorerObjects != null;
-        //}
-
-        internal bool GetRouteFromHistory(bool routeDirection, out string route)
+        internal bool GetRouteFromHistory(bool routeDirection, out List<ExplorerObjectViewModel> explorerObjects)
         {
-            route = null;
+            explorerObjects = null;
 
             var countRouteQueue = NavigationHistoryRoutesQueue.Count - 1;
 
@@ -80,9 +62,9 @@ namespace ExplorerApp
             if (routeDirection) _currentPositionInHistory++;
             else _currentPositionInHistory--;
 
-            route = NavigationHistoryRoutesQueue[_currentPositionInHistory];
+            explorerObjects = AppDirectories.GetExplorerObjectsByRoute(NavigationHistoryRoutesQueue[_currentPositionInHistory]);
 
-            return route != null;
+            return explorerObjects != null;
         }
 
         private static void ConfigureData()

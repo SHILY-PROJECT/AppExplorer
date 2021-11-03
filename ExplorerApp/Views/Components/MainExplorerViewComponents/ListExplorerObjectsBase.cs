@@ -9,9 +9,6 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
 {
     public class ListExplorerObjectsBase : ComponentBase
     {
-        //[Parameter]
-        //public EventCallback<bool> OnChangeRouteBackOrNext { get; set; }
-
         [Parameter]
         public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
 
@@ -35,10 +32,10 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
             ListExplorerObjects = DataStore.Instance.GetRouteObjects(route);
         }
 
-        //protected void DisplayExplorerObjects(List<ExplorerObjectViewModel> explorerObjects)
-        //{
-        //    ListExplorerObjects = null;
-        //    ListExplorerObjects = explorerObjects;
-        //}
+        protected void DisplayExplorerObjects(List<ExplorerObjectViewModel> expObj)
+        {
+            ListExplorerObjects = null;
+            ListExplorerObjects = expObj;
+        }
     }
 }

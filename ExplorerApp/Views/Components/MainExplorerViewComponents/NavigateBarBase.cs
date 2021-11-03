@@ -6,11 +6,11 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
     public class NavigateBarBase : ComponentBase
     {
         [Parameter]
-        public EventCallback<bool> OnSwitchRouteBackOrNext { get; set; }
-
-        protected async Task ChangeRoute(bool routeDirection)
+        public EventCallback<bool> OnSwitchRouteHistory { get; set; }
+        
+        protected async Task SwitchRoute(bool routeDirection)
         {
-            await OnSwitchRouteBackOrNext.InvokeAsync(routeDirection);
+            await OnSwitchRouteHistory.InvokeAsync(routeDirection);
         }
     }
 }

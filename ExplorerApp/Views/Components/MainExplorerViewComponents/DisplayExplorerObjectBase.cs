@@ -18,12 +18,7 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         public EventCallback<string> OnGoToRoute { get; set; }
 
         [Parameter]
-        public EventCallback<List<ExplorerObjectViewModel>> OnGoToRouteBackOrNext { get; set; }
-
-        public void OpenExplorerObject(string route)
-        {
-            OnGoToRoute.InvokeAsync(route);          
-        }
+        public EventCallback<List<ExplorerObjectViewModel>> OnGoToRouteFromHistory { get; set; }
 
         protected async Task OpenExplorerObject() => await (ExplorerObject.TypeObject switch
         {
@@ -32,10 +27,8 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
             _ => throw new NotImplementedException()
         });
 
-        private static Task ProcessingFile(string path)
-        {
-            // заглушка
-            return Task.FromResult<string>(null);
-        }
+        // заглушка
+        private static Task ProcessingFile(string path) => Task.FromResult<string>(null);
+        
     }
 }
