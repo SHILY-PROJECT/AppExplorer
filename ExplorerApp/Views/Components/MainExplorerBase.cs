@@ -14,7 +14,7 @@ namespace ExplorerApp.Views.Components
         protected void SwitchRouteDirection(bool routeDirection)
         {
             
-            if (DataStore.Instance.GetRouteFromHistory(routeDirection, out var expObj))
+            if (DataStore.Instance.GetExplorerObjectFromHistory(routeDirection, out var expObj))
             {
                 //Descendants.ListExplorerObjectsView.SetNewListExplorerObjects(explorerObjects);
 

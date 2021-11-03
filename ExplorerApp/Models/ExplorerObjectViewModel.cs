@@ -22,11 +22,51 @@ namespace ExplorerApp.Models
 
         public long SizeInBytes { get; private set; }
 
-        public string SizeForView { get; private set; }
+        public string SizeForView { get; private set; } = "None";
 
-        public ExplorerObjectViewModel()
+        public List<ExplorerObjectViewModel> ObjectsInCurrentDirectory { get; private set; } = null;
+
+        private ExplorerObjectViewModel(string fillName)
         {
-            SizeForView = "None";
+            Route = new Uri(fillName).AbsolutePath.Replace(DataStore.Instance.BaseDirectoryFullName.AbsolutePath, "");
+            ObjectFullName = new Uri(fillName);
+            ObjectName = Path.GetFileName(fillName);
+        }
+
+        public ExplorerObjectViewModel(FileInfo file) : this(file.FullName)
+        {
+            TypeObject = ExplorerObjectTypeEnum.File;
+
+            // костыльный вариант, пока что, не знаю как иначе
+            var path = Path.Combine(Environment.CurrentDirectory, @"wwwroot\images\extensions");
+            Icon = Directory.GetFiles(path, "*.svg").FirstOrDefault(x => Path.GetFileNameWithoutExtension(x) == file.Extension.Trim('.')) ?? Path.Combine(path, "none.svg");
+            Icon = $"/images/extensions/{Path.GetFileName(Icon)}";
+
+            DetermineSizeObject(file);
+        }
+
+        public ExplorerObjectViewModel(DirectoryInfo directory) : this(directory.FullName)
+        {
+            if (Route.Contains(":"))
+            {
+                Route = Route.Replace(":", "");
+                TypeObject = ExplorerObjectTypeEnum.Disc;
+                Icon = "";
+            }
+            else
+            {
+                TypeObject = ExplorerObjectTypeEnum.Folder;
+                Icon = "/images/extensions/folder.svg";
+            }
+
+            ObjectsInCurrentDirectory = new();
+
+            ObjectsInCurrentDirectory.AddRange(Directory.EnumerateDirectories(directory.FullName, "*", SearchOption.TopDirectoryOnly)
+                .Select(x => new ExplorerObjectViewModel(new DirectoryInfo(x))));
+            ObjectsInCurrentDirectory.AddRange(Directory.EnumerateFiles(directory.FullName, "*", SearchOption.TopDirectoryOnly)
+                .Select(x => new ExplorerObjectViewModel(new FileInfo(x))));
+
+            DetermineSizeObject(directory);
         }
 
         protected internal void DetermineSizeObject(DirectoryInfo directory)

@@ -29,11 +29,11 @@ namespace ExplorerApp
         internal string BaseRoute { get; private set; }
 
 
-        private List<FolderObjectViewModel> AppDirectories { get; set; } = new();
+        private List<ExplorerObjectViewModel> AppDirectories { get; set; } = new();
 
-        private List<string> NavigationHistoryRoutesQueue { get; set; } = new();
+        private List<ExplorerObjectViewModel> NavigationHistoryRoutesQueue { get; set; } = new();
 
-        private List<ExplorerObjectViewModel> CurrentExplorerObjects { get; set; }
+        private ExplorerObjectViewModel CurrentExplorerObject { get; set; }
 
 
         private DataStore()
@@ -46,11 +46,13 @@ namespace ExplorerApp
         internal List<ExplorerObjectViewModel> GetRouteObjects(string route)
         {
             _currentPositionInHistory++;
-            NavigationHistoryRoutesQueue.Add(route);
-            return CurrentExplorerObjects = AppDirectories.GetExplorerObjectsByRoute(route);
+            CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(route);
+            NavigationHistoryRoutesQueue.Add(CurrentExplorerObject);
+
+            return CurrentExplorerObject.ObjectsInCurrentDirectory;
         }
 
-        internal bool GetRouteFromHistory(bool routeDirection, out List<ExplorerObjectViewModel> explorerObjects)
+        internal bool GetExplorerObjectFromHistory(bool routeDirection, out List<ExplorerObjectViewModel> explorerObjects)
         {
             explorerObjects = null;
 
@@ -62,24 +64,24 @@ namespace ExplorerApp
             if (routeDirection) _currentPositionInHistory++;
             else _currentPositionInHistory--;
 
-            explorerObjects = AppDirectories.GetExplorerObjectsByRoute(NavigationHistoryRoutesQueue[_currentPositionInHistory]);
+            explorerObjects = NavigationHistoryRoutesQueue[_currentPositionInHistory].ObjectsInCurrentDirectory;
 
             return explorerObjects != null;
         }
 
         private static void ConfigureData()
         {
-            var baseObject = new FolderObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
+            var baseObject = new ExplorerObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
 
             _instance.AppDirectories.Add(baseObject);
-            _instance.NavigationHistoryRoutesQueue.Add(baseObject.Route);
+            _instance.NavigationHistoryRoutesQueue.Add(baseObject);
             _instance.CreateTreeView(Environment.CurrentDirectory);
         }
 
         private void CreateTreeView(string path)
         {
             foreach (var folder in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
-                _instance.AppDirectories.Add(new FolderObjectViewModel(new DirectoryInfo(folder)));          
+                _instance.AppDirectories.Add(new ExplorerObjectViewModel(new DirectoryInfo(folder)));          
         }
 
     }
