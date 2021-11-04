@@ -31,6 +31,9 @@ namespace ExplorerApp
         {
             _currentPositionInHistory++;
 
+            if (NavigationHistoryRoutesQueue.ElementAtOrDefault(_currentPositionInHistory) != null)
+                NavigationHistoryRoutesQueue.RemoveRange(_currentPositionInHistory, NavigationHistoryRoutesQueue.Count - _currentPositionInHistory);
+
             CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(route);
             NavigationHistoryRoutesQueue.Add(CurrentExplorerObject);
 
@@ -44,7 +47,7 @@ namespace ExplorerApp
             var countRouteQueue = NavigationHistoryRoutesQueue.Count - 1;
 
             if ((routeDirection && _currentPositionInHistory >= countRouteQueue) ||
-                (!routeDirection && countRouteQueue <= 1)) return false;
+                (!routeDirection && (countRouteQueue <= 1 || _currentPositionInHistory <= 1))) return false;
 
             if (routeDirection) _currentPositionInHistory++;
             else _currentPositionInHistory--;
@@ -57,6 +60,7 @@ namespace ExplorerApp
         private void ConfigureData()
         {
             var baseExpObj = new ExplorerObjectViewModel(BaseDirectoryFullName, new DirectoryInfo(Environment.CurrentDirectory));
+
             this.AppDirectories.Add(baseExpObj);
             this.NavigationHistoryRoutesQueue.Add(baseExpObj);
             this.CreateTreeView(Environment.CurrentDirectory);
