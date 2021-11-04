@@ -26,14 +26,14 @@ namespace ExplorerApp.Models
 
         public List<ExplorerObjectViewModel> ObjectsInCurrentDirectory { get; private set; } = null;
 
-        private ExplorerObjectViewModel(string fillName)
+        private ExplorerObjectViewModel(Uri baseDirectoryFullName, string fillName)
         {
-            Route = new Uri(fillName).AbsolutePath.Replace(DataStore.Instance.BaseDirectoryFullName.AbsolutePath, "");
+            Route = new Uri(fillName).AbsolutePath.Replace(baseDirectoryFullName.AbsolutePath, "");
             ObjectFullName = new Uri(fillName);
             ObjectName = Path.GetFileName(fillName);
         }
 
-        public ExplorerObjectViewModel(FileInfo file) : this(file.FullName)
+        public ExplorerObjectViewModel(Uri baseDirectoryFullName, FileInfo file) : this(baseDirectoryFullName, file.FullName)
         {
             TypeObject = ExplorerObjectTypeEnum.File;
 
@@ -45,7 +45,7 @@ namespace ExplorerApp.Models
             DetermineSizeObject(file);
         }
 
-        public ExplorerObjectViewModel(DirectoryInfo directory) : this(directory.FullName)
+        public ExplorerObjectViewModel(Uri baseDirectoryFullName, DirectoryInfo directory) : this(baseDirectoryFullName, directory.FullName)
         {
             if (Route.Contains(":"))
             {
@@ -62,9 +62,9 @@ namespace ExplorerApp.Models
             ObjectsInCurrentDirectory = new();
 
             ObjectsInCurrentDirectory.AddRange(Directory.EnumerateDirectories(directory.FullName, "*", SearchOption.TopDirectoryOnly)
-                .Select(x => new ExplorerObjectViewModel(new DirectoryInfo(x))));
+                .Select(x => new ExplorerObjectViewModel(baseDirectoryFullName, new DirectoryInfo(x))));
             ObjectsInCurrentDirectory.AddRange(Directory.EnumerateFiles(directory.FullName, "*", SearchOption.TopDirectoryOnly)
-                .Select(x => new ExplorerObjectViewModel(new FileInfo(x))));
+                .Select(x => new ExplorerObjectViewModel(baseDirectoryFullName, new FileInfo(x))));
 
             DetermineSizeObject(directory);
         }

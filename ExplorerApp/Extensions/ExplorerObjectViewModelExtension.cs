@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using System.Collections.Generic;
+using ExplorerApp.Models;
 
-namespace ExplorerApp.Models
+namespace ExplorerApp.Extensions
 {
     public static class ExplorerObjectViewModelExtension
     {

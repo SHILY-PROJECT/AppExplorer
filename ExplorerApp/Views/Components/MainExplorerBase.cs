@@ -13,15 +13,8 @@ namespace ExplorerApp.Views.Components
 
         protected void SwitchRouteDirection(bool routeDirection)
         {
-            
             if (DataStore.Instance.GetExplorerObjectFromHistory(routeDirection, out var expObj))
-            {
-                //Descendants.ListExplorerObjectsView.SetNewListExplorerObjects(explorerObjects);
-
-                //Descendants.DisplayExplorerObjectView.OnGoToRoute.InvokeAsync(route);
-                //DescendantComponents.DisplayExplorerObjectView.GoToRouteFromHistory(expObj);
                 DescendantComponents.DisplayExplorerObject.OnGoToRouteFromHistory.InvokeAsync(expObj);
-            }           
         }
 
     }

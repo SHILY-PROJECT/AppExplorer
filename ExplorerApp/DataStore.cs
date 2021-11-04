@@ -3,49 +3,34 @@ using System.IO;
 using System.Collections.Generic;
 using ExplorerApp.Models;
 using System.Linq;
+using ExplorerApp.Extensions;
 
 namespace ExplorerApp
 {
     internal class DataStore
     {
         private static DataStore _instance;
-        private int _currentPositionInHistory;
+        private int _currentPositionInHistory = 0;
 
-        internal static DataStore Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new DataStore();
-                    ConfigureData();
-                }
-                return _instance;
-            }
-        }
-
+        internal static DataStore Instance { get => _instance ??= new(); }
         internal Uri BaseDirectoryFullName { get; private set; }
-
         internal string BaseRoute { get; private set; }
 
-
-        private List<ExplorerObjectViewModel> AppDirectories { get; set; } = new();
-
-        private List<ExplorerObjectViewModel> NavigationHistoryRoutesQueue { get; set; } = new();
-
         private ExplorerObjectViewModel CurrentExplorerObject { get; set; }
-
+        private List<ExplorerObjectViewModel> AppDirectories { get; set; } = new();
+        private List<ExplorerObjectViewModel> NavigationHistoryRoutesQueue { get; set; } = new();
 
         private DataStore()
         {
-            _currentPositionInHistory = 0;
-            BaseDirectoryFullName = new Uri(Path.GetDirectoryName(Environment.CurrentDirectory));
+            BaseDirectoryFullName = new(Path.GetDirectoryName(Environment.CurrentDirectory));
             BaseRoute = new Uri(Environment.CurrentDirectory).AbsolutePath.Replace(BaseDirectoryFullName.AbsolutePath, "");
+            this.ConfigureData();
         }
 
         internal List<ExplorerObjectViewModel> GetRouteObjects(string route)
         {
             _currentPositionInHistory++;
+
             CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(route);
             NavigationHistoryRoutesQueue.Add(CurrentExplorerObject);
 
@@ -69,20 +54,16 @@ namespace ExplorerApp
             return explorerObjects != null;
         }
 
-        private static void ConfigureData()
+        private void ConfigureData()
         {
-            var baseObject = new ExplorerObjectViewModel(new DirectoryInfo(Environment.CurrentDirectory));
-
-            _instance.AppDirectories.Add(baseObject);
-            _instance.NavigationHistoryRoutesQueue.Add(baseObject);
-            _instance.CreateTreeView(Environment.CurrentDirectory);
+            var baseExpObj = new ExplorerObjectViewModel(BaseDirectoryFullName, new DirectoryInfo(Environment.CurrentDirectory));
+            this.AppDirectories.Add(baseExpObj);
+            this.NavigationHistoryRoutesQueue.Add(baseExpObj);
+            this.CreateTreeView(Environment.CurrentDirectory);
         }
 
         private void CreateTreeView(string path)
-        {
-            foreach (var folder in Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories))
-                _instance.AppDirectories.Add(new ExplorerObjectViewModel(new DirectoryInfo(folder)));          
-        }
-
+            => Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories).ToList()
+            .ForEach(folder => this.AppDirectories.Add(new ExplorerObjectViewModel(BaseDirectoryFullName, new DirectoryInfo(folder))));
     }
 }
