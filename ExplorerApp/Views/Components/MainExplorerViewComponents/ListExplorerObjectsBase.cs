@@ -12,6 +12,9 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         [Parameter]
         public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
 
+        [Parameter]
+        public EventCallback OnChangeCurrentDirectory { get; set; }
+
         protected internal DisplayExplorerObject ChildDisplayExplorerObject { get; set; }
 
         protected override Task OnInitializedAsync()
@@ -30,12 +33,14 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         {
             ListExplorerObjects = null;
             ListExplorerObjects = DataStore.Instance.GetRouteObjects(route);
+            OnChangeCurrentDirectory.InvokeAsync();
         }
 
         protected void DisplayExplorerObjects(List<ExplorerObjectViewModel> expObj)
         {
             ListExplorerObjects = null;
             ListExplorerObjects = expObj;
+            OnChangeCurrentDirectory.InvokeAsync();
         }
     }
 }
