@@ -7,7 +7,7 @@ using System;
 
 namespace ExplorerApp.Views.Components.MainExplorerViewComponents
 {
-    public class NavigateBarBase : ComponentBase
+    public class NavigationBarBase : ComponentBase
     {
         [Inject]
         IJSRuntime JSRuntime { get; set; }
@@ -18,23 +18,41 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         [Parameter]
         public EventCallback<SortOptionsEnum> OnSortOption { get; set; }
 
+        private SortOptionsEnum _currentSortOption;
+
+        protected SortOptionsEnum CurrentSortOption
+        {
+            get => _currentSortOption;
+            set
+            {
+                _currentSortOption = value;
+                ChangedSortOption();
+            }
+        }
+
         protected Dictionary<SortOptionsEnum, string> SortingTypes = new()
         {
             [SortOptionsEnum.SortByDefault] = "Сортировка по умолчанию",
-            [SortOptionsEnum.SortByType] = "Сортировать по типу",
+            //[SortOptionsEnum.SortByType] = "Сортировать по типу",
             [SortOptionsEnum.SortByAlphabet] = "Сортировать по алфавиту",
-            [SortOptionsEnum.SortBySizeFromMinToMax] = "Сортировать по размеру ⬇",
-            [SortOptionsEnum.SortBySizeFromMaxToMin] = "Сортировать по размеру ⬆"
+            [SortOptionsEnum.SortBySizeFromMinToMax] = "Сортировать по размеру ⬆",
+            [SortOptionsEnum.SortBySizeFromMaxToMin] = "Сортировать по размеру ⬇"
         };
 
         internal void SetCurrentDirectory(string currentDirectory)
             => CurrentDirectory = currentDirectory;
 
-        protected async void ChangedSortOption(ChangeEventArgs a)
-            => await OnSortOption.InvokeAsync((SortOptionsEnum)Enum.Parse(typeof(SortOptionsEnum), (string)a.Value));
+        internal void SetDefaultSortOption()
+        {
+            _currentSortOption = SortOptionsEnum.SortByDefault;
+            StateHasChanged();
+        }
+
+        protected async void ChangedSortOption()
+            => await OnSortOption.InvokeAsync(CurrentSortOption);      
 
         protected string CurrentDirectory { get; set; }
-        
+
         protected async Task SwitchRoute(bool routeDirection)
             => await OnSwitchRouteHistory.InvokeAsync(routeDirection);
 

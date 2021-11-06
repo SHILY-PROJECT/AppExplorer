@@ -4,12 +4,12 @@ namespace ExplorerApp.Models
 {
     public class DescendantCompinentsMainExplorer
     {
-        private NavigateBar _navigateBar;
+        private NavigationBar _navigateBar;
         private TreeDirectories _treeDirectories;
         private ListExplorerObjects _listExplorerObjects;
         private DisplayExplorerObject _displayExplorerObject;
 
-        public NavigateBar NavigateBar
+        public NavigationBar NavigateBar
         { 
             get => _navigateBar;
             set => _navigateBar = value;

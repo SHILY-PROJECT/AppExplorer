@@ -10,10 +10,10 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
     public class ListExplorerObjectsBase : ComponentBase
     {
         [Parameter]
-        public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
+        public EventCallback OnChangeCurrentDirectory { get; set; }
 
         [Parameter]
-        public EventCallback OnChangeCurrentDirectory { get; set; }
+        public List<ExplorerObjectViewModel> ListExplorerObjects { get; set; }
 
         protected internal DisplayExplorerObject ChildDisplayExplorerObject { get; set; }
 
@@ -27,7 +27,6 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
             => ListExplorerObjects = listExplorerObjects;
 
         private void LoadParentRoute()
-            //=> ListExplorerObjects = DataStore.Instance.GetObjectsInCurrentDirectory;
             => ListExplorerObjects = DataStore.Instance.GetRouteObjects(DataStore.Instance.BaseRoute);
 
         protected void GoToRoute(string route)
@@ -37,11 +36,17 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
             OnChangeCurrentDirectory.InvokeAsync();
         }
 
-        protected void DisplayExplorerObjects(List<ExplorerObjectViewModel> expObj)
+        protected void DisplayObjects(List<ExplorerObjectViewModel> expObj)
         {
             ListExplorerObjects = null;
             ListExplorerObjects = expObj;
             OnChangeCurrentDirectory.InvokeAsync();
+        }
+
+        protected void DisplaySortedObjects(List<ExplorerObjectViewModel> expObj)
+        {
+            ListExplorerObjects = null;
+            ListExplorerObjects = expObj;
         }
     }
 }

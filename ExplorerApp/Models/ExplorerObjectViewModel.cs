@@ -87,7 +87,6 @@ namespace ExplorerApp.Models
         {
             string size;
 
-            // этот вариант просто понятнее
             if (length <= (long)Math.Pow(2, 10)) size = length != 0 ? $"1 KB" : "0 KB";
             else if (length <= (long)Math.Pow(2, 20)) size = $"{Math.Round(length / Math.Pow(2, 10))} KB";
             else if (length <= (long)Math.Pow(2, 30)) size = $"{Math.Round(length / Math.Pow(2, 20))} MB";
@@ -100,17 +99,6 @@ namespace ExplorerApp.Models
             else size = "HZ";
 
             return size;
-
-            // а этот я свиснул где-то из интернетов ваших (+-зарефачил)
-            //var ends = new[] { "Byt", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB", "HZ" };
-
-            //if (length == 0) return $"{0} {ends[0]}";
-
-            //var bytes = Math.Abs(length);
-            //var index = (int)Math.Floor(Math.Log(bytes, 1024));
-            //var num = Math.Round(bytes / Math.Pow(1024, index), 1);
-
-            //return $"{Math.Sign(length) * num} {ends[index]}";
         }
     }
 }

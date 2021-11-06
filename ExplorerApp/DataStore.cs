@@ -21,8 +21,7 @@ namespace ExplorerApp
         private List<ExplorerObjectViewModel> AppDirectories { get; set; } = new();
         private List<ExplorerObjectViewModel> NavigationHistoryQueue { get; set; } = new();
 
-        internal string CurrentDirectory
-            => CurrentExplorerObject.ObjectFullName.LocalPath;
+        internal string CurrentDirectory => CurrentExplorerObject.ObjectFullName.LocalPath;
 
         private DataStore()
         {
@@ -32,11 +31,15 @@ namespace ExplorerApp
             ConfigureData();
         }
 
-        internal void SetBaseExplorerObject()
-            => CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(BaseRoute);
+        internal void SetBaseExplorerObjectAndDefaultSettings()
+        {
+            CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(BaseRoute);
+            
+            if (NavigationHistoryQueue.ElementAtOrDefault(1) != null)
+                NavigationHistoryQueue.RemoveRange(1, NavigationHistoryQueue.Count - 1);
 
-        //internal List<ExplorerObjectViewModel> GetObjectsInCurrentDirectory()
-        //    => CurrentExplorerObject.ObjectsInCurrentDirectory;
+            _currentPositionInHistory = 0;
+        }
 
         internal List<ExplorerObjectViewModel> GetObjectsInCurrentDirectory(SortOptionsEnum sortOption) => sortOption switch
         {
@@ -93,5 +96,6 @@ namespace ExplorerApp
         private void CreateTreeView(string path)
             => Directory.EnumerateDirectories(path, "*", SearchOption.AllDirectories).ToList()
             .ForEach(folder => AppDirectories.Add(new ExplorerObjectViewModel(BaseDirectoryFullName, new DirectoryInfo(folder))));
+
     }
 }

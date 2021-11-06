@@ -4,7 +4,12 @@
 {
     @foreach (var obj in ListExplorerObjects)
     {
-        <DisplayExplorerObject ExplorerObject="obj" @ref="ChildDisplayExplorerObject" OnGoToRoute="GoToRoute" OnGoToRouteFromHistory="DisplayExplorerObjects"/>
+        <DisplayExplorerObject
+            @ref="ChildDisplayExplorerObject"
+            ExplorerObject="obj"
+            OnGoToRoute="GoToRoute"
+            OnGoToRouteFromHistory="DisplayObjects"
+            OnSortedObjects="DisplaySortedObjects"/>
     }
 }
 else

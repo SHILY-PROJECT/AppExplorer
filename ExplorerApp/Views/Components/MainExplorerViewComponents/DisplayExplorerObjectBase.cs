@@ -12,13 +12,16 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
     public class DisplayExplorerObjectBase : ComponentBase
     {
         [Parameter]
-        public ExplorerObjectViewModel ExplorerObject { get; set; }
-
-        [Parameter]
         public EventCallback<string> OnGoToRoute { get; set; }
 
         [Parameter]
         public EventCallback<List<ExplorerObjectViewModel>> OnGoToRouteFromHistory { get; set; }
+
+        [Parameter]
+        public EventCallback<List<ExplorerObjectViewModel>> OnSortedObjects { get; set; }
+
+        [Parameter]
+        public ExplorerObjectViewModel ExplorerObject { get; set; }
 
         protected async Task OpenExplorerObject() => await (ExplorerObject.TypeObject switch
         {
