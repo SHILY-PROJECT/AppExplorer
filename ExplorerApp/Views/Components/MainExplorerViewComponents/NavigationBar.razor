@@ -3,7 +3,7 @@
 <div style="display: inline-flex;">
 
     <label type="submit" class="btn btn-dark" style="width: 60px; height: 38px" @onclick="() => SwitchRoute(false)">Back</label>
-    <label type="submit" class="btn btn-dark" style="width: 60px; height: 38px; margin-left: 10px;" @onclick="() => SwitchRoute(true)">Next <i class="bi bi-sort-down"></i></label>
+    <label type="submit" class="btn btn-dark" style="width: 60px; height: 38px; margin-left: 10px;" @onclick="() => SwitchRoute(true)">Next</label>
     
     <select class="form-select" style="width: 270px; height: 38px; margin-left: 25px" @bind="@CurrentSortOption">
         @foreach (var s in SortingTypes)
