@@ -24,9 +24,10 @@ namespace ExplorerApp.Views.Components.MainExplorerViewComponents
         }
 
         public void SetNewListExplorerObjects(List<ExplorerObjectViewModel> listExplorerObjects)
-            => ListExplorerObjects = listExplorerObjects;      
+            => ListExplorerObjects = listExplorerObjects;
 
         private void LoadParentRoute()
+            //=> ListExplorerObjects = DataStore.Instance.GetObjectsInCurrentDirectory;
             => ListExplorerObjects = DataStore.Instance.GetRouteObjects(DataStore.Instance.BaseRoute);
 
         protected void GoToRoute(string route)

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ExplorerApp.Views.Components.MainExplorerViewComponents;
-using ExplorerApp.Models;
 using System.Threading.Tasks;
+using ExplorerApp.Enums;
+using ExplorerApp.Models;
 
 namespace ExplorerApp.Views.Components
 {
@@ -18,5 +19,9 @@ namespace ExplorerApp.Views.Components
         protected void SetCurrentDirectoryInNavigateBar()
             => DescendantComponents.NavigateBar.SetCurrentDirectory(DataStore.Instance.CurrentDirectory);
 
+        protected void SortRouteObjects(SortOptionsEnum sortOption)
+            => DescendantComponents.DisplayExplorerObject.OnGoToRouteFromHistory
+            .InvokeAsync(DataStore.Instance.GetObjectsInCurrentDirectory(sortOption));
+        
     }
 }

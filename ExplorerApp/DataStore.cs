@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using ExplorerApp.Models;
 using System.Linq;
 using ExplorerApp.Extensions;
+using ExplorerApp.Enums;
 
 namespace ExplorerApp
 {
@@ -20,7 +21,8 @@ namespace ExplorerApp
         private List<ExplorerObjectViewModel> AppDirectories { get; set; } = new();
         private List<ExplorerObjectViewModel> NavigationHistoryQueue { get; set; } = new();
 
-        internal string CurrentDirectory => CurrentExplorerObject.ObjectFullName.LocalPath;
+        internal string CurrentDirectory
+            => CurrentExplorerObject.ObjectFullName.LocalPath;
 
         private DataStore()
         {
@@ -29,6 +31,22 @@ namespace ExplorerApp
             
             ConfigureData();
         }
+
+        internal void SetBaseExplorerObject()
+            => CurrentExplorerObject = AppDirectories.GetExplorerObjectByRoute(BaseRoute);
+
+        //internal List<ExplorerObjectViewModel> GetObjectsInCurrentDirectory()
+        //    => CurrentExplorerObject.ObjectsInCurrentDirectory;
+
+        internal List<ExplorerObjectViewModel> GetObjectsInCurrentDirectory(SortOptionsEnum sortOption) => sortOption switch
+        {
+            SortOptionsEnum.SortByDefault => CurrentExplorerObject.ObjectsInCurrentDirectory,
+            SortOptionsEnum.SortByType => CurrentExplorerObject.ObjectsInCurrentDirectory.OrderBy(x => x.TypeObject).ToList(),
+            SortOptionsEnum.SortByAlphabet => CurrentExplorerObject.ObjectsInCurrentDirectory.OrderBy(x => x.ObjectName).ToList(),
+            SortOptionsEnum.SortBySizeFromMinToMax => CurrentExplorerObject.ObjectsInCurrentDirectory.OrderBy(x => x.SizeInBytes).ToList(),
+            SortOptionsEnum.SortBySizeFromMaxToMin => CurrentExplorerObject.ObjectsInCurrentDirectory.OrderByDescending(x => x.SizeInBytes).ToList(),
+            _ => CurrentExplorerObject.ObjectsInCurrentDirectory
+        };
 
         internal List<ExplorerObjectViewModel> GetRouteObjects(string route)
         {
