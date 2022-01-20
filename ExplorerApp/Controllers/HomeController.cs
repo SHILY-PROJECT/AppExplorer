@@ -1,25 +1,20 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using ExplorerApp.Models;
-
-namespace ExplorerApp.Controllers
+﻿namespace ExplorerApp.Controllers
 {
-    public class ExplorerController : Controller
+    public class HomeController : Controller
     {
-        private readonly ILogger<ExplorerController> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public ExplorerController(ILogger<ExplorerController> logger)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Privacy()
         {
             return View();
         }
