@@ -1,6 +1,6 @@
 ﻿namespace ExplorerApp.Components
 {
-    public class RepositoryManager : IRepositoryManager
+    internal class RepositoryManager : IRepositoryManager
     {
         private readonly Uri _appDirectory;
         private readonly string _appRoute;
