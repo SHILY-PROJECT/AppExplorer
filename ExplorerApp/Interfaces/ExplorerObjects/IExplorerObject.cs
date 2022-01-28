@@ -2,18 +2,29 @@
 {
     internal interface IExplorerObject
     {
-        public Uri? FullName { get; }
+        /// <summary>
+        /// Object directory.
+        /// </summary>
+        public Uri? Directory { get; }
 
+        /// <summary>
+        /// Object name.
+        /// </summary>
         public string? Name { get; }
 
+        /// <summary>
+        /// Part way.
+        /// </summary>
         public string? Route { get; }
 
-        public string? Extension { get; }
-
+        /// <summary>
+        /// Displayed icon in the explorer.
+        /// </summary>
         public string? Icon { get; }
 
-        public long SizeInBytes { get; }
-
-        public string? SizeForView { get; }
+        /// <summary>
+        /// Size in bytes.
+        /// </summary>
+        public long Size { get; }
     }
 }

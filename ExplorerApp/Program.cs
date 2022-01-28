@@ -1,11 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
+var services = builder.Services;
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-builder.Services.AddControllersWithViews();
-builder.Services.AddSingleton<IRepositoryManager, RepositoryManager>();
+services.AddControllersWithViews();
+services.AddRazorPages();
+services.AddServerSideBlazor();
+services.AddControllersWithViews();
+services.AddSingleton<IRepositoryManager, RepositoryManager>();
 
 var app = builder.Build();
 
