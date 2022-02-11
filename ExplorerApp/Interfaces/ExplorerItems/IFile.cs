@@ -1,6 +1,6 @@
-﻿namespace ExplorerApp.Interfaces.ExplorerObjects
+﻿namespace ExplorerApp.Interfaces.ExplorerItems
 {
-    internal interface IFile : IExplorerObject
+    internal interface IFile : IExplorerItem
     {
         /// <summary>
         /// File extension.

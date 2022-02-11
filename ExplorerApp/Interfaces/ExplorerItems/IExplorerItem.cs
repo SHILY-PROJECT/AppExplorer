@@ -1,6 +1,6 @@
-﻿namespace ExplorerApp.Interfaces.ExplorerObjects
+﻿namespace ExplorerApp.Interfaces.ExplorerItems
 {
-    internal interface IExplorerObject
+    public interface IExplorerItem
     {
         /// <summary>
         /// Object directory.

@@ -6,7 +6,9 @@ services.AddControllersWithViews();
 services.AddRazorPages();
 services.AddServerSideBlazor();
 services.AddControllersWithViews();
-services.AddSingleton<IRepositoryManager, RepositoryManager>();
+
+services.AddSingleton<IApplicationDataManager, ApplicationDataManager>();
+services.AddSingleton<INavigator, Navigator>();
 
 var app = builder.Build();
 

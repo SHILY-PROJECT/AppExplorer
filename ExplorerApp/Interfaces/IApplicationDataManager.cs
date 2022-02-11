@@ -1,6 +1,6 @@
 ﻿namespace ExplorerApp.Interfaces
 {
-    internal interface IRepositoryManager
+    public interface IApplicationDataManager
     {
         Uri AppDirectory { get; }
         string AppRoute { get; }
