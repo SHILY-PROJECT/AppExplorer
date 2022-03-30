@@ -1,6 +1,6 @@
 ﻿namespace ExplorerApp.Models.ExplorerModels
 {
-    public sealed class FolderModel : ExplorerObjectModel, IFolder
+    public sealed class FolderModel : ExplorerItem, IFolder
     {
 
     }

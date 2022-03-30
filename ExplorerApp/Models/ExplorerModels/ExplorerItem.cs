@@ -1,6 +1,6 @@
 ﻿namespace ExplorerApp.Models.ExplorerModels
 {
-    public abstract class ExplorerObjectModel : IExplorerItem
+    public abstract class ExplorerItem : IExplorerItem
     {
         public Uri? Directory { get; }
 
