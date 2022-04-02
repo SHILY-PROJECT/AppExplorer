@@ -1,7 +1,6 @@
-﻿namespace ExplorerApp.Interfaces.ExplorerItems
-{
-    public interface IFolder : IExplorerItem
-    {
+﻿namespace ExplorerApp.Interfaces.ExplorerItems;
 
-    }
+public interface IFolder : IExplorerItem
+{
+
 }

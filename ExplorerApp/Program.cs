@@ -1,3 +1,6 @@
+using ExplorerApp.Components;
+using ExplorerApp.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 
@@ -5,14 +8,12 @@ var services = builder.Services;
 services.AddControllersWithViews();
 services.AddRazorPages();
 services.AddServerSideBlazor();
-services.AddControllersWithViews();
 
-services.AddSingleton<IApplicationDataManager, ApplicationDataManager>();
+services.AddSingleton<IAppDataManager, AppDataManager>();
 services.AddSingleton<INavigator, Navigator>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -21,11 +22,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-app.UseAuthorization();
-
 app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapBlazorHub();
 

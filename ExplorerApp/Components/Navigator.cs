@@ -1,4 +1,6 @@
-﻿namespace ExplorerApp.Components;
+﻿using ExplorerApp.Interfaces;
+
+namespace ExplorerApp.Components;
 
 /*
 * Cmd hint:  cd "C:\Users\ILYA\Desktop\SHILY PROJECT"
@@ -7,7 +9,7 @@
 
 public class Navigator : INavigator
 {
-    public Navigator(IApplicationDataManager repository)
+    public Navigator(IAppDataManager repository)
     {
 
     }
@@ -32,4 +34,3 @@ public class Navigator : INavigator
         throw new NotImplementedException();
     }
 }
-
